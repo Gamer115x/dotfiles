@@ -1,0 +1,158 @@
+# ----------- Begin 3-keybinds -----------
+#
+# Keybinds are often simple single-purpose actions. They're better known
+# as Keyboard Shortcuts. In i3, Keyboard Shortcuts are the primary method
+# to moving around and doing stuff.
+
+#If there's something i3 doesn't like when it compiles the config, it will
+# yell at you. Any duplicates will be overwritten by the one closest to the
+# bottom.
+
+# Close Window
+# Keybind to close a window.
+bindsym $mod+Shift+q kill
+
+# Menu
+# i3 defaults to using dmenu for a program launcher, or menu.
+# Alternative: jgmenu, Gnome-pie
+bindsym $mod+d exec dmenu_run -p "$>" -sb maroon
+# i3-specific launcher that lists applications listed in traditional menus.
+bindsym $mod+shift+d exec i3-dmenu-desktop --dmenu='dmenu -i -p "Applications 🔍" -sb darkgreen'
+# Colorcoded for obvious effect - uses X color name system.
+
+# Open A Terminal
+# i3-sensible-terminal looks for the best fitting Terminal
+# prompt available on the system.
+bindsym $mod+Return exec i3-sensible-terminal
+
+# WINDOW CONTROLS
+# Speifically for manipulating windows.
+# >
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+# Assign to a hotkey if needed; not often used
+
+# Workspaces
+# $ws# assigned in 2-declare
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus border toggle, move scratchpad
+
+# <
+
+# MEDIA CONTROLS
+# Customize accordingly.
+# >
+
+# Play/pause media Player
+bindsym "172" exec --no-startup-id "lollypop -t"
+#Bindsym is for Lollypop Media Player - Adjust for current Media player.
+# Eg.
+# Rhythmbox:
+#bindsym "172" exec --no-startup-id "rhythmbox-client --no-start --play-pause"
+
+# Volume Controls
+# There are two methods printed here: Pulseaudio and Alsa. Pick your poison.
+#PULSEAUDIO (Using pactl)
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+#ALSA (using amixer)
+#bindsym XF86AudioMute exec --no-startup-id "amixer -D pulse set Master 1+ toggle"
+#bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 9%-"
+#bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 9%+"
+
+
+#Misc
+# Some laptops/keyboards have the option to mute the mic.
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# <
+
+# System
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+#bindsym $mod+Shift+r restart
+# Advanced compiliation method to include conf.d directory and compile.
+bindsym $mod+Shift+r exec cat ~/.config/i3/conf.d/* > ~/.config/i3/config && i3-msg restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# ----------- End 3-keybinds -----------

@@ -1,0 +1,25 @@
+# This is a compiliation of files at ~/.config/i3/conf.d/
+# It is something that could be modified continually as long as
+# it's compiled in order.
+#
+# i3 config file (1-warning)
+# - Basic information and warnings; prelude to i3config file
+#
+# (2-declare)
+# - define variables and shortcuts
+#
+# (3-keybinds)
+# - bindsyms and keybinds for i3 shortcuts
+#
+# (4-modes)
+# - modes or environmental functions that alter (3-keybinds)
+#
+# (5-XF86)
+# - special bindcodes/bindsyms for laptops or special keys
+#
+# (6-bar)
+# - settings and init for workspace bar (i3status, Polybar, etc.)
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+# This is a custom, hand-picked set of config files.
+#
+# ----------- End 1-warning -----------

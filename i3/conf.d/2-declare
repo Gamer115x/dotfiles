@@ -1,0 +1,77 @@
+# ----------- Begin 2-declare -----------
+#
+# i3 does not accept code-based variables; use wrapper scripts
+# for those purposes, if needed.
+#
+# Modifier Key(s)
+
+set $mod Mod1
+set $mods Mod4
+
+set $ctrl control
+
+# Mod1 includes Alt_L and Meta_L (Alt_R).
+# Mod4 includes Super_L and Super_R.
+# control includes L and R Control keys (often printed as Ctrl).
+# shift includes both L and R Shift keys.
+
+# Font(s)
+# set fonts to be used with i3wm
+font pango:Hack 8
+
+# Default is pango:monospace 8
+# Suggested is pango:DejaVu Sans Mono 8
+# Will also be used unless bar {} has another assigned.
+
+# Floating modifier - Press $mod while dragging to assert full
+# control over a floating window.
+floating_modifier $mod
+
+# Start Desktop background
+# autostart service for desktop Background
+exec --no-startup-id /home/$USER/./.fehbg || i3-nagbar -m "Feh does not have a .fehbg file in your home folder. Run feh --bg-fill <picture> to remedy this."
+#errors and notifies user if file is not found.
+# Alternative: nitrogen.
+
+# Start Network Manager
+exec --no-startup-id nm-applet || i3-nagbar -m "Couldn't seem to find nm-applet."
+#errors and notifies user if not installed.
+
+# Start Desktop Compositor
+exec --no-startup-id picom || i3-nagbar -m "Couldn't activate picom. It isn't required, but desktop visuals may not be as pleasing, just functional."
+#errors and notifies user if not installed
+# Alternatives: compton (Dep), Xcompmgr
+
+# Set Workspace ID
+# Borrowed from i3 4.18.1's config wizard. Set workspace title, or keep it
+# numerical by default.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+# Default: numerical.
+# Suggested: Name for individual applications.
+
+# Application Definitions
+# >
+
+# Ghostwriter
+#Remove window decor
+for_window [class="ghostwriter"] border none
+for_window [class="ghostwriter"] floating_border none
+
+# <
+
+# Authentication Polkit
+# A service not required for typical work, but otherwise allows programs to call
+# for sudo access.
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+
+# ----------- End 2-declare -----------

@@ -1,0 +1,425 @@
+# This is a compiliation of files at ~/.config/i3/conf.d/
+# It is something that could be modified continually as long as
+# it's compiled in order.
+#
+# i3 config file (1-warning)
+# - Basic information and warnings; prelude to i3config file
+#
+# (2-declare)
+# - define variables and shortcuts
+#
+# (3-keybinds)
+# - bindsyms and keybinds for i3 shortcuts
+#
+# (4-modes)
+# - modes or environmental functions that alter (3-keybinds)
+#
+# (5-XF86)
+# - special bindcodes/bindsyms for laptops or special keys
+#
+# (6-bar)
+# - settings and init for workspace bar (i3status, Polybar, etc.)
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+# This is a custom, hand-picked set of config files.
+#
+# ----------- End 1-warning -----------
+# ----------- Begin 2-declare -----------
+#
+# i3 does not accept code-based variables; use wrapper scripts
+# for those purposes, if needed.
+#
+# Modifier Key(s)
+
+set $mod Mod1
+set $mods Mod4
+
+set $ctrl control
+
+# Mod1 includes Alt_L and Meta_L (Alt_R).
+# Mod4 includes Super_L and Super_R.
+# control includes L and R Control keys (often printed as Ctrl).
+# shift includes both L and R Shift keys.
+
+# Font(s)
+# set fonts to be used with i3wm
+font pango:Hack 8
+
+# Default is pango:monospace 8
+# Suggested is pango:DejaVu Sans Mono 8
+# Will also be used unless bar {} has another assigned.
+
+# Floating modifier - Press $mod while dragging to assert full
+# control over a floating window.
+floating_modifier $mod
+
+# Start Desktop background
+# autostart service for desktop Background
+exec --no-startup-id /home/$USER/./.fehbg || i3-nagbar -m "Feh does not have a .fehbg file in your home folder. Run feh --bg-fill <picture> to remedy this."
+#errors and notifies user if file is not found.
+# Alternative: nitrogen.
+
+# Start Network Manager
+exec --no-startup-id nm-applet || i3-nagbar -m "Couldn't seem to find nm-applet."
+#errors and notifies user if not installed.
+
+# Start Desktop Compositor
+exec --no-startup-id picom || i3-nagbar -m "Couldn't activate picom. It isn't required, but desktop visuals may not be as pleasing, just functional."
+#errors and notifies user if not installed
+# Alternatives: compton (Dep), Xcompmgr
+
+# Set Workspace ID
+# Borrowed from i3 4.18.1's config wizard. Set workspace title, or keep it
+# numerical by default.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+# Default: numerical.
+# Suggested: Name for individual applications.
+
+# Application Definitions
+# >
+
+# Ghostwriter
+#Remove window decor
+for_window [class="ghostwriter"] border none
+for_window [class="ghostwriter"] floating_border none
+
+# <
+
+# Authentication Polkit
+# A service not required for typical work, but otherwise allows programs to call
+# for sudo access.
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+
+# ----------- End 2-declare -----------
+# ----------- Begin 3-keybinds -----------
+#
+# Keybinds are often simple single-purpose actions. They're better known
+# as Keyboard Shortcuts. In i3, Keyboard Shortcuts are the primary method
+# to moving around and doing stuff.
+
+#If there's something i3 doesn't like when it compiles the config, it will
+# yell at you. Any duplicates will be overwritten by the one closest to the
+# bottom.
+
+# Close Window
+# Keybind to close a window.
+bindsym $mod+Shift+q kill
+
+# Menu
+# i3 defaults to using dmenu for a program launcher, or menu.
+# Alternative: jgmenu, Gnome-pie
+bindsym $mod+d exec dmenu_run -p "$>" -sb maroon
+# i3-specific launcher that lists applications listed in traditional menus.
+bindsym $mod+shift+d exec i3-dmenu-desktop --dmenu='dmenu -i -p "Applications 🔍" -sb darkgreen'
+# Colorcoded for obvious effect - uses X color name system.
+
+# Open A Terminal
+# i3-sensible-terminal looks for the best fitting Terminal
+# prompt available on the system.
+bindsym $mod+Return exec i3-sensible-terminal
+
+# WINDOW CONTROLS
+# Speifically for manipulating windows.
+# >
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+# Assign to a hotkey if needed; not often used
+
+# Workspaces
+# $ws# assigned in 2-declare
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus border toggle, move scratchpad
+
+# <
+
+# MEDIA CONTROLS
+# Customize accordingly.
+# >
+
+# Play/pause media Player
+bindsym "172" exec --no-startup-id "lollypop -t"
+#Bindsym is for Lollypop Media Player - Adjust for current Media player.
+# Eg.
+# Rhythmbox:
+#bindsym "172" exec --no-startup-id "rhythmbox-client --no-start --play-pause"
+
+# Volume Controls
+# There are two methods printed here: Pulseaudio and Alsa. Pick your poison.
+#PULSEAUDIO (Using pactl)
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+#ALSA (using amixer)
+#bindsym XF86AudioMute exec --no-startup-id "amixer -D pulse set Master 1+ toggle"
+#bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 9%-"
+#bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 9%+"
+
+
+#Misc
+# Some laptops/keyboards have the option to mute the mic.
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# <
+
+# System
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+#bindsym $mod+Shift+r restart
+# Advanced compiliation method to include conf.d directory and compile.
+bindsym $mod+Shift+r exec cat ~/.config/i3/conf.d/* > ~/.config/i3/config && i3-msg restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# ----------- End 3-keybinds -----------
+# ----------- Begin 4-modes -----------
+# Modes operate like Functions. They are declared and operate in
+# their own "sandbox" if you will.
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# QuickMenu -- Quicklaunch some programs.
+mode "QuickMenu" {
+    # These bindings trigger as soon as you enter "QuickMenu" mode.
+    # These bindings are ordered in a fairly easy-to-understand way, where the most commonly used
+    # program is the "key" and derivitaves that may have some other purpose requires a "SHIFT,"
+    # a "MOD," or a "CTRL" to work alongside it.
+
+    #Exit Mode.
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym BackSpace mode "default"
+
+    # Files
+    bindsym d exec nautilus, mode "default"
+
+    # Firefox Web Browser
+    bindsym f exec firefox, mode "default"
+
+    # Music Player
+    bindsym r exec lollypop, mode "default"
+
+    ## Document Processor keybindings.
+
+    # LyX Document Processor
+    bindsym l exec lyx, mode "default"
+
+    # LibreOffice Suite
+    bindsym o exec libreoffice, mode "default"
+    # Get straight to the Pen...Point.
+    bindsym Shift+o exec 'libreoffice --writer', mode "default"
+
+    ##Sometimes, having the option to switch between two Text Editors makes for best adaptation to your
+    ## Requirements; sometimes, I like Kate for the way it formats code, and I prefer Gedit for writing
+    ## plain text documents.
+
+    # Kate Text Editor
+    bindsym t exec kate, mode "default"
+    # Gedit Text Editor
+    bindsym Shift+t exec gedit, mode "default"
+
+    # Atom IDE
+    # If regular Package 'atom' cannot be found, try Flathub call
+    bindsym a exec "atom || io.atom.Atom", mode "default"
+
+    ## Art and Graphics Programs
+
+    #Krita
+    bindsym k exec krita, mode "default"
+
+    ## Terminal-based commands
+    ##Decided to use the Win Key (Mod4) as the Activator here.
+
+    # Nano Text Editor (Most like DOS Edit)
+    bindsym $mods+n exec gnome-terminal -- nano, mode "default"
+
+    # Vim Text Editor (Most like Emacs)
+    bindsym $mods+v exec gnome-terminal -- vim, mode "default"
+
+    ##Planning on making a comprehensive method for "visualizing" the
+    ## way that these shortcuts are executed, like (QWERTY) Three Sections
+    ## are divided for three sets of programs.
+    ## i.e. qweasdzxc -- System and general OS (Files, etc.)
+}
+
+bindsym $mod+Shift+apostrophe mode "QuickMenu"
+
+# Plan C -- Disables most Mod Keybinds except an escape key and utilities. Useful for programs that use the Mod key.
+mode "Plan C" {
+	# These bindings trigger as soon as you enter "Plan C" mode.
+
+	# Exit Mode. Since almost no programs use Alt/Win + Esc, this gives the ultimate flexibility.
+	bindsym $mod+Escape mode "default"
+
+	##Edit or remove workspace switcher if needed. I use it for LyX and Evince.
+	## However, I know of no reason why //not// to keep these, since there aren't
+	## many applications that use Alt/Super+<number> in their hotkey table.
+
+  # switch to workspace
+  bindsym $mod+1 workspace number $ws1
+  bindsym $mod+2 workspace number $ws2
+  bindsym $mod+3 workspace number $ws3
+  bindsym $mod+4 workspace number $ws4
+  bindsym $mod+5 workspace number $ws5
+  bindsym $mod+6 workspace number $ws6
+  bindsym $mod+7 workspace number $ws7
+  bindsym $mod+8 workspace number $ws8
+  bindsym $mod+9 workspace number $ws9
+  bindsym $mod+0 workspace number $ws10
+
+  # move focused container to workspace
+  bindsym $mod+Shift+1 move container to workspace number $ws1
+  bindsym $mod+Shift+2 move container to workspace number $ws2
+  bindsym $mod+Shift+3 move container to workspace number $ws3
+  bindsym $mod+Shift+4 move container to workspace number $ws4
+  bindsym $mod+Shift+5 move container to workspace number $ws5
+  bindsym $mod+Shift+6 move container to workspace number $ws6
+  bindsym $mod+Shift+7 move container to workspace number $ws7
+  bindsym $mod+Shift+8 move container to workspace number $ws8
+  bindsym $mod+Shift+9 move container to workspace number $ws9
+  bindsym $mod+Shift+0 move container to workspace number $ws10
+
+
+}
+bindsym $mod+Shift+slash --release mode "Plan C"
+
+# ----------- End 4-modes -----------
+# ----------- Begin 5-XF86 -----------
+#
+# XF86-specific keybinds that should otherwise be exclusive to a device.
+# These are commands that otherwise couldn't fit in 3-keybinds.
+# It is normal to have this empty.
+
+# ----------- End 5-XF86 -----------
+# ----------- Start 6-bar -----------
+# Quick insert for the i3bar.
+
+#i3Bar Details:
+# << Colors >>
+# - Colors are formed through Hexadecimal code.
+# - setting " background #000000 " is default.
+# - binding_mode is the color of the box for showing if you have a mode active.
+# - I didn't like the default red, so I changed it to a light-blue.
+
+bar {
+        status_command i3status
+	colors {
+		# bind mode: Background - Border - Text
+		binding_mode #2f343a #0066ff #000000
+		background #000000
+	}
+}
+
+#Please check and/or modify the equivalent i3status
+
+# ----------- End 6-bar -----------
