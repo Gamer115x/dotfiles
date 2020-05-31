@@ -16,10 +16,9 @@ Currently documented:
 
 - **i3** - Config files regarding my i3wm setup. It has been to the best attempt to be thoroughly documented. \
 It is compiled from several separate files to one file upon restart. \
-Copy dated 05/31/2020; Updated upon major revision.
+Copy dated 05/31/2020; Updated upon major revision.\
+i3 config.bak file included for slightly modified default copy.
 
-|i3 config.bak file included for slightly modified default copy.|
--
 
 - **i3status** - Config file regarding i3wm setup.\
 Preconfigured to display Volume, free space on `/`, display IPv4 and connection strength on wlo1, IPv4 on enp1s0, "real" charge on BAT0 and date and 12-hr time.\
