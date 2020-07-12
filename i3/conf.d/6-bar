@@ -1,6 +1,9 @@
 # ----------- Start 6-bar -----------
 # Quick insert for the i3bar.
 
+## COMMENTED OUT FOR POLYBAR. (Check 2-declare for startup call before removing
+## comment Hashes.)
+
 #i3Bar Details:
 # << Colors >>
 # - Colors are formed through Hexadecimal code.
@@ -8,14 +11,14 @@
 # - binding_mode is the color of the box for showing if you have a mode active.
 # - I didn't like the default red, so I changed it to a light-blue.
 
-bar {
-        status_command i3status
-	colors {
-		# bind mode: Background - Border - Text
-		binding_mode #2f343a #0066ff #000000
-		background #000000
-	}
-}
+#bar {
+#        status_command i3status
+#	colors {
+#		# bind mode: Background - Border - Text
+#		binding_mode #2f343a #0066ff #000000
+#		background #000000
+#	}
+#}
 
 #Please check and/or modify the equivalent i3status
 
